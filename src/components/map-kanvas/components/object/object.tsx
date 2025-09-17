@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import useImage from "use-image";
 import { Image } from "react-konva";
 
+import { withBasePath } from "@/lib/utils";
+
 import { ObjectProps } from "./interfaces";
 
 const Object: FC<ObjectProps> = ({
@@ -21,7 +23,7 @@ const Object: FC<ObjectProps> = ({
       width={width}
       height={height}
       {...rest}
-      alt={src}
+      alt={withBasePath(src)}
       image={image}
     />
   );

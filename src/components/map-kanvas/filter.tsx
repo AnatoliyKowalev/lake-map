@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 
 import { MAP_YEARS } from "./constants";
 import { useMapFilter } from "@/contexts/map-filter";
+import { withBasePath } from "@/lib/utils";
 
 const Filter = () => {
   const { filter, updateFilter } = useMapFilter();
@@ -33,7 +34,7 @@ const Filter = () => {
                       [`opacity_${year}`]: opacity === 1 ? 0 : 1,
                     })
                   }
-                  src={`/${year}.jpg`}
+                  src={withBasePath(`/${year}.jpg`)}
                   width={100}
                   height={100}
                   className="rounded w-full"
@@ -58,7 +59,7 @@ const Filter = () => {
       })}
       <div className="relative flex gap-2">
         <Image
-          src={`/layers.jpg`}
+          src={withBasePath(`/layers.jpg`)}
           width={100}
           height={100}
           className="rounded w-full"

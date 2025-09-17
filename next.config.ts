@@ -1,11 +1,11 @@
 import { NextConfig } from "next";
 
-// const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   output: "export", // Enables static export
-  basePath: "/lake-map", // Adjusts base path for production
-  assetPrefix: "/lake-map", // Adjusts asset prefix for production
+  basePath: isProd ? "/lake-map" : "",
+  assetPrefix: isProd ? "/lake-map/" : "",
   images: {
     unoptimized: true, // Disables image optimization
   },

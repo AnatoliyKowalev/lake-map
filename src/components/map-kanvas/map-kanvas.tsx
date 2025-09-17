@@ -8,13 +8,14 @@ import Object from "./components/object";
 import ShapeLabel from "./components/shape-label";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-import lake_2018 from "@/../public/2018.jpg";
-import lake_2022 from "@/../public/2022.jpg";
+// import lake_2018 from "@/../public/2018.jpg";
+// import lake_2022 from "@/../public/2022.jpg";
 
 import { ZONES } from "./zones";
 import { LAKE_LAYERS } from "./lake-layers";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useMapFilter } from "@/contexts/map-filter";
+import { BASE_PATH } from "@/lib/constants";
 import {
   DEFAULT_HISTORY,
   DEFAULT_MAP_SIZE,
@@ -23,6 +24,7 @@ import {
 } from "./constants";
 
 import { TypeHistory } from "./interfaces";
+import { withBasePath } from "@/lib/utils";
 
 const MapKanvas: FC = () => {
   // const [size, setSize] = useState(DEFAULT_MAP_SIZE);
@@ -80,14 +82,15 @@ const MapKanvas: FC = () => {
   const mapScaler = (size: number) => (isMobile ? size / 2 : size);
 
   useEffect(() => {
-    Promise.all([loadImage(lake_2018.src), loadImage(lake_2022.src)]).then(
-      ([map_2018, map_2022]) => {
-        setHistory({
-          map_2018,
-          map_2022,
-        });
-      }
-    );
+    Promise.all([
+      loadImage(`${BASE_PATH}/2018.jpg`),
+      loadImage(`${BASE_PATH}/2022.jpg`),
+    ]).then(([map_2018, map_2022]) => {
+      setHistory({
+        map_2018,
+        map_2022,
+      });
+    });
   }, []);
 
   // useEffect(() => {
@@ -147,8 +150,8 @@ const MapKanvas: FC = () => {
                   points={points.map((point) => mapScaler(point))}
                   tension={0.1}
                   opacity={0.3}
-                  stroke="#C26D2D"
-                  fill="#C26D2D"
+                  stroke="#0b5768ff"
+                  fill="#0b5768ff"
                   strokeWidth={0.5}
                   dataInfo={`Глибина: ${depth}`}
                   closed
@@ -177,7 +180,7 @@ const MapKanvas: FC = () => {
                 img && width && height && (
                   <Object
                     {...tooltipHandlers}
-                    src={img}
+                    src={withBasePath(img)}
                     x={mapScaler(x)}
                     y={mapScaler(y)}
                     width={mapScaler(width)}
@@ -196,8 +199,8 @@ const MapKanvas: FC = () => {
                 text={tooltip.text}
               />
               <ShapeLabel
-                x={50}
-                y={50}
+                x={40}
+                y={40}
                 text={`${`x:${Math.trunc(
                   isMobile ? tooltip.x * 2 : tooltip.x
                 )} y:${Math.trunc(isMobile ? tooltip.y * 2 : tooltip.y)}`}`}
