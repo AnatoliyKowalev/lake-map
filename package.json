@@ -10,7 +10,7 @@
     "lint": "next lint",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d .next/static",
-    "deploy2": "gh-pages -d out"
+    "deploy2": "gh-pages -t -d out"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.6",
