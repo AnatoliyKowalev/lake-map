@@ -15,7 +15,15 @@ const Object: FC<ObjectProps> = ({
   const [image] = useImage(src);
 
   return (
-    <Image x={x} y={y} width={width} height={height} {...rest} image={image} />
+    <Image
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+      {...rest}
+      alt={src}
+      image={image}
+    />
   );
 };
 

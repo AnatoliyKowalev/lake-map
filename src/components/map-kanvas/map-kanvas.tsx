@@ -26,7 +26,7 @@ import { TypeHistory } from "./interfaces";
 
 const MapKanvas: FC = () => {
   // const [size, setSize] = useState(DEFAULT_MAP_SIZE);
-  const [points, setPoints] = useState<number[]>([]);
+  // const [points, setPoints] = useState<number[]>([]);
   // const [isDrawing, setIsDrawing] = useState(false);
   const [tooltip, setTooltip] = useState<{
     x: number;
@@ -44,12 +44,12 @@ const MapKanvas: FC = () => {
     const pos = e.target.getStage()?.getPointerPosition();
     const info = e.target.attrs.dataInfo;
 
-    pos &&
-      info &&
+    if (pos && info) {
       setTooltip({
         ...pos,
         text: info,
       });
+    }
   };
 
   const tooltipHandlers = {
@@ -118,7 +118,7 @@ const MapKanvas: FC = () => {
       >
         <Layer>
           {MAP_YEARS.map((year) => {
-            /* @ts-ignore */
+            // @ts-expect-error sssss
             const img = history[`map_${year}`];
 
             return (
@@ -129,7 +129,7 @@ const MapKanvas: FC = () => {
                   y={0}
                   width={mapScaler(800)}
                   height={mapScaler(600)}
-                  /* @ts-ignore */
+                  // @ts-expect-error sssss
                   opacity={filter[`opacity_${year}`]}
                   key={`year-map-${year}`}
                 />

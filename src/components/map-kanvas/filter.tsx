@@ -17,7 +17,7 @@ const Filter = () => {
   return (
     <Card className="p-2 grid gap-4">
       {MAP_YEARS.map((year) => {
-        // @ts-ignore
+        // @ts-expect-error ssss
         const opacity = filter[`opacity_${year}`];
 
         return (
@@ -77,7 +77,7 @@ const Filter = () => {
         />
       </Label>
       <Label className="gap-2">
-        Показати об'єкти:
+        Показати об&lsquo;єкти:
         <Checkbox
           defaultChecked={filter.show_objects}
           onCheckedChange={(show_objects: boolean) =>
